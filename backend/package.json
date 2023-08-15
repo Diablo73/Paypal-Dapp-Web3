@@ -4,18 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@harmony-js/core": "^0.1.57",
     "@types/node": "^18.0.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "moralis": "^2.22.4",
     "node-fetch": "^3.2.6",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "tslib": "^2.6.1"
   }
 }

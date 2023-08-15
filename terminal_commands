@@ -1,0 +1,6 @@
+npm install @harmony-js/core
+npm install tslib
+npm install wagmi viem
+npm i @wagmi/chains
+npm install antd
+npm install web3 --legacy-peer-deps
