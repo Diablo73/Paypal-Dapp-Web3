@@ -29,8 +29,7 @@ export async function executeModifyUserNameMethod(myAddress, newUserName) {
 				data: data,
 			}],
 		});
-
-		console.log("Transaction Hash : ", transactionHash);
+		const transactionReceipt = await waitForTransactionReceipt(transactionHash);
 		return true;
 	} catch (error) {
 		console.error("ERROR : ", error);
@@ -50,8 +49,7 @@ export async function executeCreateRequestFunction(payeeAddress, payerAddress, r
 				data: data,
 			}],
 		});
-
-		console.log("Transaction Hash : ", transactionHash);
+		const transactionReceipt = await waitForTransactionReceipt(transactionHash);
 		return true;
 	} catch (error) {
 		console.error("ERROR : ", error);
@@ -73,8 +71,7 @@ export async function executePayRequestFunction(payerAddress, payAmount) {
 				gas: "1000000"
 			}],
 		});
-
-		console.log("Transaction Hash : ", transactionHash);
+		const transactionReceipt = await waitForTransactionReceipt(transactionHash);
 		return true;
 	} catch (error) {
 		console.error("ERROR : ", error);
@@ -94,11 +91,29 @@ export async function executeRejectRequestFunction(payerAddress) {
 				data: data,
 			}],
 		});
-
-		console.log("Transaction Hash : ", transactionHash);
+		const transactionReceipt = await waitForTransactionReceipt(transactionHash);
 		return true;
 	} catch (error) {
 		console.error("ERROR : ", error);
 		return true;
 	}
+}
+
+async function waitForTransactionReceipt(txHash, maxAttempts = 60, interval = 1000) {
+	let attempt = 0;
+	while (attempt < maxAttempts) {
+		try {
+			const receipt = await globalVariables.web3.eth.getTransactionReceipt(txHash);
+			if (receipt) {
+				console.log("Transaction Successful : ", attempt, " : ", txHash, " : ", receipt);
+				return receipt;
+			}
+		} catch (Error) {
+			console.log("ERROR : ", attempt, " : ", txHash, " : ", Error);
+		} finally {
+			attempt++;
+		}
+		await new Promise((resolve) => setTimeout(resolve, interval));
+	}
+	throw new Error("Transaction not confirmed within the specified time.");
 }
