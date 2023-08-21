@@ -1,4 +1,5 @@
-import logo from "./logo.svg";
+import logo from "./resources/logo.svg";
+import demoPicture from "./resources/paypal_demo.jpg";
 import "./App.css";
 import { useState, useEffect } from "react";
 import { Layout, Button } from "antd";
@@ -112,7 +113,12 @@ function App() {
 							</div>
 						</>
 					) : (
-						<div>Please Login</div>
+						<div>
+							<div style={{display: "block", textAlign: "center", fontSize: "26px"}}>Please Login</div>
+							<div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+								<img src={demoPicture} alt="paypal_demo" width="75%" style={{border: "1px dashed #000"}}/>
+							</div>
+						</div>
 					)}
 				</Content>
 			</Layout>
