@@ -20,10 +20,11 @@ function RequestAndPay({ userRequests, getUserAccountDetails, myAddress, myUserN
 		const isSuccess = await ContractMethods.executeCreateRequestFunction?.(
 			myAddress, payerAddress, requestAmount, requestMessage);
 		if (isSuccess) {
+			getUserAccountDetails();
 			setTimeout(() => {
 				setConfirmLoadingRequest(false);
 				hideRequestModal(false);
-			}, 2000);
+			}, 3000);
 		} else {
 			setConfirmLoadingRequest(false);
 			hideRequestModal(false);
@@ -34,11 +35,11 @@ function RequestAndPay({ userRequests, getUserAccountDetails, myAddress, myUserN
 		setConfirmLoadingProceedToPay(true);
 		const isSuccessTxn = await ContractMethods.executePayRequestFunction?.(myAddress, userRequests[0].amount);
 		if (isSuccessTxn) {
+			getUserAccountDetails();
 			setTimeout(() => {
-				getUserAccountDetails();
 				setConfirmLoadingProceedToPay(false);
 				hidePayModal(false);
-			}, 10000);
+			}, 3000);
 		} else {
 			setConfirmLoadingProceedToPay(false);
 			hidePayModal(false);
@@ -53,7 +54,7 @@ function RequestAndPay({ userRequests, getUserAccountDetails, myAddress, myUserN
 			setTimeout(() => {
 				setConfirmLoadingReject(false);
 				hidePayModal(false);
-			}, 5000);			
+			}, 3000);			
 		} else {
 			setConfirmLoadingReject(false);
 			hidePayModal(false);

@@ -10,6 +10,7 @@ import PassBook from "./components/PassBook";
 import { useConnect, useAccount, useDisconnect } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import axios from "axios";
+var console = require("console-browserify");
 
 const { Header, Content } = Layout;
 
@@ -38,7 +39,7 @@ function App() {
 	}
 
 	async function getUserAccountDetails() {
-		const res = await axios.get(`http://localhost:3001/api/getUserAccountDetails`, {
+		const res = await axios.get(window.location.origin + `/api/getUserAccountDetails`, {
 			params: { userAddress: address },
 		});
 		const response = res.data;
